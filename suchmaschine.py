@@ -7,6 +7,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 import urllib.request
 import json
 import urllib
+import os 
 
 
 #Favicon and Header
@@ -16,8 +17,6 @@ st.set_page_config(
         )
 
 
-
-#Hide 'made with streamlit' at footer
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -30,11 +29,16 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 
 
+
+
+
 list_of_video_ids = ['EWfZ907Cpy8', 'sx93aUj4A_o', 'GE_00MgKMEI', 'gF69voHU_ys', 'tAtaIZD0Ebs', '3E75UvmY9GA', 'fOPP9Qe10Rg']
 all_transcripts = []
 
 
-# Loop videos: 
+# Loop videos:
+
+
 for VideoID in list_of_video_ids: 
   params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
   url = "https://www.youtube.com/oembed"
@@ -80,23 +84,22 @@ for VideoID in list_of_video_ids:
 img = Image.open("google.jpg")
 
 
-col1, col2, col3 = st.columns([1,5,1])
+col1, col2, col3, col4, col5 = st.columns([1,1,5,1,1])
 
 with col1:
         st.write("")
-
-with col2:
-        st.image(img)
-        #add a search bar
-        #only allow letters
-        #only allow a minimum of 2 characters
         
+with col3:
+        st.image(img)
+        
+
+        #add a search bar
         user_input = st.text_input("Search YouTube for words / sentences", "")
         user_input = user_input.lower()
-        if len(user_input) < 2:
-                        st.write("Please enter at least 2 characters")
-        if len(user_input) < 50:
-                        st.write("Please enter short keywords and sentences only")                
+        st.write(' ')
+
+        if len(user_input) > 60:
+                        st.write("Your sentence is too long. Try shorter ones.")                
         
         
         # We use here the global list "all_transcripts": 
@@ -139,15 +142,22 @@ with col2:
                                                 lst_results.append(matched_line)
 
                         except Exception as err: 
-                                st.write('Unexpected error - see details bellow:')
+                                st.write('Unexpected error - see details below:')
                                 st.write(err)
 
                         # Just an example for show "no results":
                 if (len(lst_results) == 0):
                         st.write("No results found with input (" + user_input + ")")
                 else: 
-                        st.write("Time stamps: ")
-                        st.write("\n".join(lst_results)) # <= this is for show the results with a line break.
+                        st.write("All time stamps: ")
+                        
+                        #st.write("\n".join(lst_results)) # <= this is for show the results with a line break.
+                        
+                        #make a new line after each https link:
+                        new_lst_results = []
+                        for i in range(len(lst_results)):
+                                new_lst_results.append(lst_results[i] + '\n')
+                        st.write("\n".join(new_lst_results)) # <= this is for show the results with a line break.
                         # Function ends here.
         
 
@@ -158,8 +168,52 @@ with col2:
         
 
 
-with col3:
+with col4:
         st.write("")
+        option = st.selectbox(
+     'What YouTube channel do you want to search?',
+     ('Lorem ipsum', 'Lorem ipsum2', 'Lorem ipsum3'))
+
+        st.write(option)
+
+
+
+
+
+
+
+
+
+footer="""<style>
+a:link , a:visited{
+color: red;
+background-color: transparent;
+text-decoration: underline;
+}
+
+a:hover,  a:active {
+color: white;
+background-color: transparent;
+text-decoration: underline;
+}
+
+.footer {
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: transparent;
+color: white;
+text-align: center;
+}
+</style>
+<div class="footer">
+<p>Developed with ❤️  by <a style='display: block; text-align: center;' href="https://www.instagram.com/max_mnemo/" target="_blank">Max Mnemo </a></p>
+</div>
+"""
+st.markdown(footer,unsafe_allow_html=True)
+
+
 
 
 
