@@ -92,9 +92,18 @@ with col1:
 with col3:
         st.image(img)
         
+        st.write("")
+        option = st.selectbox(
+     'What YouTube channel do you want to search?',
+     ('ChubbyEmu', 'Lorem ipsum2', 'Lorem ipsum3'))
+
+        st.write(option)
+        st.write("")
+
+
 
         #add a search bar
-        user_input = st.text_input("Search YouTube for words / sentences", "")
+        user_input = st.text_input("Type in the words/sentences you want to search", "")
         user_input = user_input.lower()
         st.write(' ')
 
@@ -150,7 +159,8 @@ with col3:
                         st.write("No results found with input (" + user_input + ")")
                 else: 
                         st.write("All time stamps: ")
-                        
+                        st.write("__________________")
+
                         #st.write("\n".join(lst_results)) # <= this is for show the results with a line break.
                         
                         #make a new line after each https link:
@@ -168,18 +178,6 @@ with col3:
         
 
 
-with col4:
-        st.write("")
-        option = st.selectbox(
-     'What YouTube channel do you want to search?',
-     ('Lorem ipsum', 'Lorem ipsum2', 'Lorem ipsum3'))
-
-        st.write(option)
-
-
-
-
-
 
 
 
@@ -192,7 +190,7 @@ text-decoration: underline;
 }
 
 a:hover,  a:active {
-color: white;
+color: blue;
 background-color: transparent;
 text-decoration: underline;
 }
@@ -203,7 +201,7 @@ left: 0;
 bottom: 0;
 width: 100%;
 background-color: transparent;
-color: white;
+color: grey;
 text-align: center;
 }
 </style>
