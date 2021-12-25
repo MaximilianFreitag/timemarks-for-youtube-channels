@@ -9,11 +9,24 @@ import json
 import urllib
 
 
-
+#Favicon and Header
 st.set_page_config(
         page_title='Search YouTube content                 ',
         page_icon="🔎"
         )
+
+
+
+#Hide 'made with streamlit' at footer
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+
+
 
 
 
@@ -22,7 +35,6 @@ all_transcripts = []
 
 
 # Loop videos: 
-
 for VideoID in list_of_video_ids: 
   params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
   url = "https://www.youtube.com/oembed"
@@ -146,11 +158,8 @@ with col2:
         
 
 
-
 with col3:
         st.write("")
-
-
 
 
 
