@@ -26,18 +26,48 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 
+col1, col2, col3, col4, col5 = st.columns([1,1,5,1,1])
+img = Image.open("google.jpg")
+
+
+with col3:
+        list_of_video_ids = []
+
+#list_of_video_ids = ['EWfZ907Cpy8', 'sx93aUj4A_o', 'GE_00MgKMEI', 'gF69voHU_ys', 'tAtaIZD0Ebs', '3E75UvmY9GA', 'fOPP9Qe10Rg']
+        all_transcripts = []
+        
+        Cubby_Emu = ['EWfZ907Cpy8', 'sx93aUj4A_o', 'GE_00MgKMEI', 'gF69voHU_ys', 'tAtaIZD0Ebs', '3E75UvmY9GA', 'fOPP9Qe10Rg']
+        Veritasium = ['IgF3OX8nT0w', 'ao2Jfm35XeE', '9cNmUNHSBac', 'bHIhgxav9LY', 'cUzklzVXJwo', 'q-_7y0WUnW4', 'H1_OpWiyijU']
+        Kurzgesagt = ['xAUJYP8tnRE', 'XFqn3uy238E', 'F1Hq8eVOMHs', 'LmpuerlbJu0', 'Nv4Nk4AAgk8', 'xaQJbozY_Is', '0FRVx_c9T0c']
+
+        list_of_video_ids = []
+        
+        st.image(img)
+        
+        st.write("")
+        option = st.selectbox(
+     'What YouTube channel do you want to search?',
+     ('ChubbyEmu', 'Veritasium', 'Kurzgesagt'))
+        if option == 'ChubbyEmu':
+             #add the list Cubby_Emu to the list_of_video_ids
+                   list_of_video_ids = Cubby_Emu
+        elif option == 'Veritasium':
+                   #add the list Veritasium to the list_of_video_ids
+                    list_of_video_ids = Veritasium
+        elif option == 'Kurzgesagt':
+                         #add
+                        list_of_video_ids = Kurzgesagt
+        
+
+
+        st.write(option)
+        st.write("")
 
 
 
 
 
-
-list_of_video_ids = ['EWfZ907Cpy8', 'sx93aUj4A_o', 'GE_00MgKMEI', 'gF69voHU_ys', 'tAtaIZD0Ebs', '3E75UvmY9GA', 'fOPP9Qe10Rg']
-all_transcripts = []
-
-
-# Loop videos:
-
+#Loop videos:
 
 for VideoID in list_of_video_ids: 
   params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
@@ -70,35 +100,10 @@ for VideoID in list_of_video_ids:
 
     # Add the fetched data to the "all_transcripts" global variable.
     all_transcripts += data
-      
-  # you can also directly filter for the language you are looking for, using the transcript list
-  #transcript = transcript_list.find_transcript(['en']) 
-  #print(type(transcript))
-  #print(all_transcripts[:len(all_transcripts)-1])
-  #print(str(len(all_transcripts)))
-  #print(type(all_transcripts))
 
 
-
-
-img = Image.open("google.jpg")
-
-
-col1, col2, col3, col4, col5 = st.columns([1,1,5,1,1])
-
-with col1:
-        st.write("")
-        
 with col3:
-        st.image(img)
         
-        st.write("")
-        option = st.selectbox(
-     'What YouTube channel do you want to search?',
-     ('ChubbyEmu', 'Lorem ipsum2', 'Lorem ipsum3'))
-
-        st.write(option)
-        st.write("")
 
 
 
@@ -179,6 +184,21 @@ with col3:
 
 
 
+
+
+      
+  
+
+
+
+
+
+
+
+
+with col1:
+        st.write("")
+        
 
 
 
