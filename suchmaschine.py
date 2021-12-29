@@ -1,4 +1,4 @@
-#build a streamlit app
+
 import streamlit as st
 from PIL import Image
 import youtube_transcript_api
@@ -36,9 +36,10 @@ with col3:
 #list_of_video_ids = ['EWfZ907Cpy8', 'sx93aUj4A_o', 'GE_00MgKMEI', 'gF69voHU_ys', 'tAtaIZD0Ebs', '3E75UvmY9GA', 'fOPP9Qe10Rg']
         all_transcripts = []
         
-        Cubby_Emu = ['EWfZ907Cpy8', 'sx93aUj4A_o', 'GE_00MgKMEI', 'gF69voHU_ys', 'tAtaIZD0Ebs', '3E75UvmY9GA', 'fOPP9Qe10Rg']
-        Veritasium = ['IgF3OX8nT0w', 'ao2Jfm35XeE', '9cNmUNHSBac', 'bHIhgxav9LY', 'cUzklzVXJwo', 'q-_7y0WUnW4', 'H1_OpWiyijU']
-        Kurzgesagt = ['xAUJYP8tnRE', 'XFqn3uy238E', 'F1Hq8eVOMHs', 'LmpuerlbJu0', 'Nv4Nk4AAgk8', 'xaQJbozY_Is', '0FRVx_c9T0c']
+        cubby_Emu = ['EWfZ907Cpy8', 'sx93aUj4A_o', 'GE_00MgKMEI', 'gF69voHU_ys', 'tAtaIZD0Ebs', '3E75UvmY9GA', 'fOPP9Qe10Rg']
+        veritasium = ['IgF3OX8nT0w', 'ao2Jfm35XeE', '9cNmUNHSBac', 'bHIhgxav9LY', 'cUzklzVXJwo', 'q-_7y0WUnW4', 'H1_OpWiyijU']
+        kurzgesagt = ['xAUJYP8tnRE', 'XFqn3uy238E', 'F1Hq8eVOMHs', 'LmpuerlbJu0', 'Nv4Nk4AAgk8', 'xaQJbozY_Is', '0FRVx_c9T0c']
+        blue_brown = ['ltLUadnCyi0', 'F3Qixy-r_rQ', 'LqbZpur38nw', '-RdOwhmqP5s', 'ojjzXyQCzso', 'e50Bj7jn9IQ', 'O85OWBJ2ayo', 'lG4VkPoG3ko', 'b3NxrZOu_CE', 'X8jsijhllIA', 'mH0oCDa74tE', 'wTJI_WuZSwE', 'QvuQH4_05LI', 'pq9LcwC7CoY', 'D__UaR5MQao', 'elQVZLLiod4', '4PDoT7jtxmw', 'cEvgcoyZvB4', 'IAEASE5GjdI', 'ZxYOEwM6Wbk']
 
         list_of_video_ids = []
         
@@ -47,16 +48,19 @@ with col3:
         st.write("")
         option = st.selectbox(
      'What YouTube channel do you want to search?',
-     ('ChubbyEmu', 'Veritasium', 'Kurzgesagt'))
+     ('ChubbyEmu', 'Veritasium', 'Kurzgesagt', '3Blue1Brown'))
         if option == 'ChubbyEmu':
              #add the list Cubby_Emu to the list_of_video_ids
-                   list_of_video_ids = Cubby_Emu
+                   list_of_video_ids = cubby_Emu
         elif option == 'Veritasium':
                    #add the list Veritasium to the list_of_video_ids
-                    list_of_video_ids = Veritasium
+                    list_of_video_ids = veritasium
         elif option == 'Kurzgesagt':
                          #add
-                        list_of_video_ids = Kurzgesagt
+                        list_of_video_ids = kurzgesagt
+        elif option == '3Blue1Brown':
+                         #add
+                        list_of_video_ids = blue_brown                
         
 
 
@@ -208,13 +212,11 @@ color: red;
 background-color: transparent;
 text-decoration: underline;
 }
-
 a:hover,  a:active {
 color: blue;
 background-color: transparent;
 text-decoration: underline;
 }
-
 .footer {
 position: fixed;
 left: 0;
@@ -230,8 +232,5 @@ text-align: center;
 </div>
 """
 st.markdown(footer,unsafe_allow_html=True)
-
-
-
 
 
