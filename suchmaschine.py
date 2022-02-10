@@ -40,7 +40,7 @@ with col3:
         veritasium = ['IgF3OX8nT0w', 'ao2Jfm35XeE', '9cNmUNHSBac', 'bHIhgxav9LY', 'cUzklzVXJwo', 'q-_7y0WUnW4', 'H1_OpWiyijU']
         kurzgesagt = ['xAUJYP8tnRE', 'XFqn3uy238E', 'F1Hq8eVOMHs', 'LmpuerlbJu0', 'Nv4Nk4AAgk8', 'xaQJbozY_Is', '0FRVx_c9T0c']
         blue_brown = ['ltLUadnCyi0', 'F3Qixy-r_rQ', 'LqbZpur38nw', '-RdOwhmqP5s', 'ojjzXyQCzso', 'e50Bj7jn9IQ', 'O85OWBJ2ayo', 'lG4VkPoG3ko', 'b3NxrZOu_CE', 'X8jsijhllIA', 'mH0oCDa74tE', 'wTJI_WuZSwE', 'QvuQH4_05LI', 'pq9LcwC7CoY', 'D__UaR5MQao', 'elQVZLLiod4', '4PDoT7jtxmw', 'cEvgcoyZvB4', 'IAEASE5GjdI', 'ZxYOEwM6Wbk']
-        florian_dalwigk = ['d1x6p-jEDis', 'uX9Jnon8uVk', 'TLM-PkWKWvc', 'd-qIKqavNJM', '0dWmrQinG8c', 'EbgdM1l4oVs', 'rJ381pkHw98', 'i1OdMmC_Gw4', 'aIU0BWp-COg', 'xtR4xqjkWNA', 'cgfsdk4vzNA', 'M-loecqXKA0', 'DP6TrKPOHnc', '7k5jOGay0rI', '98UNnyYwMIQ']
+        florian_dalwigk = ['d1x6p-jEDis', 'uX9Jnon8uVk', 'TLM-PkWKWvc', 'd-qIKqavNJM', '0dWmrQinG8c', 'EbgdM1l4oVs', 'rJ381pkHw98', 'i1OdMmC_Gw4', 'aIU0BWp-COg', 'xtR4xqjkWNA', 'cgfsdk4vzNA', 'M-loecqXKA0', 'DP6TrKPOHnc', '7k5jOGay0rI', '98UNnyYwMIQ', 'wMPSFRUXEjA', '-PN5AlgpbJo', 'm_YuYqTgUn4', 'XRWp1JxgHTk', 'eScc8w3CtWA', 'pe5K5C8zzb4', 'OHmqsQ6UQiI', 'KamT4oIiDFg', 'RqdtEvW3_Wo', 'pfivHCLHIus', 'XZ9kmSG31WM', 'kM_DMMb6hgs', 'A41P_qWlu2A', 'YBAiF0MLaBg', 'G3vLQP5yAKQ', 'mJQdCQasDUo', 'zC4pyS6RVC8', '9b6qxSst97w', 'vqWnLUzRx5s', 'Rs4hsrIu1QI', 'JZOVTtyd04U', 'em4Vqo9sxto', 'mXPHCAHb4AY', 'XOH1JaNBeFU', 'nrkrgtC5Kck', 'VzxhaUoBxH8', 'M2hnbdOWUWg', 'xS2q-_aqZYA', 'Fkwf6kDyh_Q', 'z7-EmiKbEeE']
 
 
         
