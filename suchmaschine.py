@@ -33,7 +33,7 @@ img = Image.open("google.jpg")
 with col3:
         list_of_video_ids = []
 
-#list_of_video_ids = ['EWfZ907Cpy8', 'sx93aUj4A_o', 'GE_00MgKMEI', 'gF69voHU_ys', 'tAtaIZD0Ebs', '3E75UvmY9GA', 'fOPP9Qe10Rg']
+
         all_transcripts = []
         
         cubby_Emu = ['EWfZ907Cpy8', 'sx93aUj4A_o', 'GE_00MgKMEI', 'gF69voHU_ys', 'tAtaIZD0Ebs', '3E75UvmY9GA', 'fOPP9Qe10Rg']
