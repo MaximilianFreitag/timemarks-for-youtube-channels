@@ -52,7 +52,7 @@ with col3:
         st.write("")
         option = st.selectbox(
      'What YouTube channel do you want to search?',
-     ('ChubbyEmu', 'Veritasium', 'Kurzgesagt', '3Blue1Brown'))
+     ('ChubbyEmu', 'Veritasium', 'Kurzgesagt', '3Blue1Brown', 'Florian Dalwigk (Algorithmen verstehen)'))
         if option == 'ChubbyEmu':
              #add the list Cubby_Emu to the list_of_video_ids
                    list_of_video_ids = cubby_Emu
