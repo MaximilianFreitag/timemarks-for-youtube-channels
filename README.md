@@ -31,7 +31,7 @@ __________________________________________________
 ### To-Do list: (Things that I want to add as a functionality)
 
 - [ ] Implement multi threading for faster results
-- [ ] Being able to search the entire YouTube channel. For demonstration purposes I only indexed 30 videos
+- [ ] Being able to search the entire YouTube channel. For demonstration purposes I only indexed 30 videos because my iterative algorithm is too slow for now
 - [ ] Add 50 YouTube channels
 
 
