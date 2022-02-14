@@ -1,20 +1,20 @@
-
 import streamlit as st
-from PIL import Image
-import youtube_transcript_api
-import simplejson
-from youtube_transcript_api import YouTubeTranscriptApi
-import urllib.request
-import json
-import urllib
-import os 
+import pandas as pd
+import numpy as np
+import pytchat as pytchat
+import matplotlib.pyplot as plt
+#import plotly
+import plotly.graph_objects as go
+
+
 
 
 #Favicon and Header
 st.set_page_config(
-        page_title='Search YouTube content                 ',
-        page_icon="🔎"
+        page_title='YouTube Livechat Analyse                 ',
+        page_icon="📊"
         )
+
 
 
 hide_streamlit_style = """
@@ -26,189 +26,244 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 
+
+
+
+
+#START VALUES
+authors = []
+messages = []
+supporters = []
+timestamps = []
+laugh = []
+mods = []
+gesuchtes_wort = []
+gezeigte_worte = []
+
+
+
+liveChat = None
+
+
+
 col1, col2, col3, col4, col5 = st.columns([1,1,5,1,1])
-img = Image.open("google.jpg")
-
-
-with col3:
-        list_of_video_ids = []
-
-
-        all_transcripts = []
-        
-        cubby_Emu = ['EWfZ907Cpy8', 'sx93aUj4A_o', 'GE_00MgKMEI', 'gF69voHU_ys', 'tAtaIZD0Ebs', '3E75UvmY9GA', 'fOPP9Qe10Rg']
-        veritasium = ['IgF3OX8nT0w', 'ao2Jfm35XeE', '9cNmUNHSBac', 'bHIhgxav9LY', 'cUzklzVXJwo', 'q-_7y0WUnW4', 'H1_OpWiyijU']
-        kurzgesagt = ['xAUJYP8tnRE', 'XFqn3uy238E', 'F1Hq8eVOMHs', 'LmpuerlbJu0', 'Nv4Nk4AAgk8', 'xaQJbozY_Is', '0FRVx_c9T0c']
-        blue_brown = ['ltLUadnCyi0', 'F3Qixy-r_rQ', 'LqbZpur38nw', '-RdOwhmqP5s', 'ojjzXyQCzso', 'e50Bj7jn9IQ', 'O85OWBJ2ayo', 'lG4VkPoG3ko', 'b3NxrZOu_CE', 'X8jsijhllIA', 'mH0oCDa74tE', 'wTJI_WuZSwE', 'QvuQH4_05LI', 'pq9LcwC7CoY', 'D__UaR5MQao', 'elQVZLLiod4', '4PDoT7jtxmw', 'cEvgcoyZvB4', 'IAEASE5GjdI', 'ZxYOEwM6Wbk']
-        florian_dalwigk = ['d1x6p-jEDis', 'uX9Jnon8uVk', 'TLM-PkWKWvc', 'd-qIKqavNJM', '0dWmrQinG8c', 'EbgdM1l4oVs', 'rJ381pkHw98', 'i1OdMmC_Gw4', 'aIU0BWp-COg', 'xtR4xqjkWNA', 'cgfsdk4vzNA', 'M-loecqXKA0', 'DP6TrKPOHnc', '7k5jOGay0rI', '98UNnyYwMIQ', 'wMPSFRUXEjA', '-PN5AlgpbJo', 'm_YuYqTgUn4', 'XRWp1JxgHTk', 'eScc8w3CtWA', 'pe5K5C8zzb4', 'OHmqsQ6UQiI', 'KamT4oIiDFg', 'RqdtEvW3_Wo', 'pfivHCLHIus', 'XZ9kmSG31WM', 'kM_DMMb6hgs', 'A41P_qWlu2A', 'YBAiF0MLaBg', 'G3vLQP5yAKQ', 'mJQdCQasDUo', 'zC4pyS6RVC8', '9b6qxSst97w', 'vqWnLUzRx5s', 'Rs4hsrIu1QI', 'JZOVTtyd04U', 'em4Vqo9sxto', 'mXPHCAHb4AY', 'XOH1JaNBeFU', 'nrkrgtC5Kck', 'VzxhaUoBxH8', 'M2hnbdOWUWg', 'xS2q-_aqZYA', 'Fkwf6kDyh_Q', 'z7-EmiKbEeE']
-
-
-        
-        
-        list_of_video_ids = []
-        
-        st.image(img)
-        
-        st.write("")
-        option = st.selectbox(
-     'What YouTube channel do you want to search?',
-     ('ChubbyEmu', 'Veritasium', 'Kurzgesagt', '3Blue1Brown', 'Florian Dalwigk (Algorithmen verstehen)'))
-        if option == 'ChubbyEmu':
-             #add the list Cubby_Emu to the list_of_video_ids
-                   list_of_video_ids = cubby_Emu
-        elif option == 'Veritasium':
-                   #add the list Veritasium to the list_of_video_ids
-                    list_of_video_ids = veritasium
-        elif option == 'Kurzgesagt':
-                         #add
-                        list_of_video_ids = kurzgesagt
-        elif option == '3Blue1Brown':
-                         #add
-                        list_of_video_ids = blue_brown                
-        elif option == 'Florian Dalwigk (Algorithmen verstehen)':
-                         #add
-                        list_of_video_ids = florian_dalwigk
-
-
-        st.write(option)
-        st.write("")
-
-
-
-
-
-#Loop videos:
-
-for VideoID in list_of_video_ids: 
-  params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
-  url = "https://www.youtube.com/oembed"
-  query_string = urllib.parse.urlencode(params)
-  url = url + "?" + query_string
-  
-  with urllib.request.urlopen(url) as response:
-      response_text = response.read()
-      data = json.loads(response_text.decode())
-      #print('Title: ' + data['title'])
-  
-  # Separator? - not sure its purpose...
-  print(' ')
-  
-  # retrieve the available transcripts
-  transcript_list = YouTubeTranscriptApi.list_transcripts(VideoID)
-  
-  # iterate over all available transcripts
-  for transcript in transcript_list: 
-    # fetch the actual transcript data
-    #print(transcript.fetch())
-    data = transcript.fetch()
-
-    #data = transcript.fetch() # [{'text': "i'm gonna attempt to collect 30 million", 'start': 0.0, 'duration': 4.16}, {'text': '...
-    #print(type(data)) # <class 'list'>
-
-    # Add "video_id" for recover it later: 
-    data.insert(0, {'video_id': VideoID})
-
-    # Add the fetched data to the "all_transcripts" global variable.
-    all_transcripts += data
-
-
-with col3:
-        
-
-
-
-        #add a search bar
-        user_input = st.text_input("Type in the words/sentences you want to search", "")
-        user_input = user_input.lower()
-        st.write(' ')
-
-        if len(user_input) > 60:
-                        st.write("Your sentence is too long. Try shorter ones.")                
-        
-        
-        # We use here the global list "all_transcripts": 
-        dictionary = all_transcripts
-
-        # Function to loop all transcripts and search the captions thath contains the 
-        # user input.
-        # TO-DO: Validate when no data is found.
-        def search_dictionary(user_input, dictionary): 
-                link = 'https://youtu.be/'
-
-                # Get the video_id: 
-                v_id  = ""
-
-                # I add here the debbuged results: 
-                lst_results = []
-
-                # string body:
-                matched_line = ""
-
-                # You're really looping a list of dictionaries: 
-                for i in range(len(dictionary)): # <= this is really a "list".
-                        try:
-                #print(type(dictionary[i])) # <= this is really a "dictionary".
-                #print(dictionary[i])
-
-                # now you can iterate here the "dictionary": 
-                                for x, y in dictionary[i].items():
-        
-                                        if (x == "video_id"): 
-                                                v_id = y
-                                        if (user_input in str(y) and len(v_id) > 0):
-                                                matched_line = str(dictionary[i]['text']) + '...' + str(dictionary[i]['start']) + ' min und ' + str(dictionary[i]['duration']) + ' sec :: ' + link + v_id + '?t=' + str(int(dictionary[i]['start'] - 1)) + 's'
-                
-          
-                        # Check if line does not exists in the list of results: 
-                                        if len(lst_results) == 0:
-                                                lst_results.append(matched_line)
-                                        if matched_line not in lst_results: 
-                                                lst_results.append(matched_line)
-
-                        except Exception as err: 
-                                st.write('Unexpected error - see details below:')
-                                st.write(err)
-
-                        # Just an example for show "no results":
-                if (len(lst_results) == 0):
-                        st.write("No results found with input (" + user_input + ")")
-                else: 
-                        st.write("All time stamps: ")
-                        st.write("__________________")
-
-                        #st.write("\n".join(lst_results)) # <= this is for show the results with a line break.
-                        
-                        #make a new line after each https link:
-                        new_lst_results = []
-                        for i in range(len(lst_results)):
-                                new_lst_results.append(lst_results[i] + '\n')
-                        st.write("\n".join(new_lst_results)) # <= this is for show the results with a line break.
-                        # Function ends here.
-        
-
-        if st.button("Search"):
-                
-                search_dictionary(user_input, dictionary)  
-        
-        
-
-
-
-
-
-      
-  
-
-
-
-
-
-
 
 
 with col1:
         st.write("")
+
+with col5:
+        st.write("")        
+
+
+with col3:
+    st.title('Youtube Livestream Analyse')
+
+    st.write('Gebe eine URL eines bereits beendeten YouTube livestream und vergewissere dich, dass die Wiedergabe des chats aktiviert wurde. ')
+    st.write('Die Analyse funktioniert nicht bei gerade laufenden livestreams! ')
+    st.write('Hier ist eine Beispiel URL eines streams der 60 Minuten ging. Ich habe leider keinen kürzeren stream gefunden...')
+    
+    st.code('https://www.youtube.com/watch?v=e7EVbT0W9uU')
+    
+    st.write('Wenn du deine URL eingibst und auf "Start" drückst, wird die Analyse gestartet. Die Analyse läuft solange bis der stream einmal komplett durchgelaufen ist. Sprich, wenn der stream 2 Stunden ging, muss man 2 Stunden auf das Ergebnis warten.')
+    st.markdown("***")
+    
+    #text box input + video url
+    url = st.text_input("Enter the video url: ", placeholder="https://www.youtube.com/watch?v=QH2-TGUlwu4")
+
+    #if url is empty display enter a url
+    if url == '':
+        st.write('Gebe die URL hier ein und drücke "Start"')
+        video_id = 'https://www.youtube.com/watch?v=e7EVbT0W9uU'
+
+    #if the url does not start with https://www.youtube.com/watch?v=
+    if url.startswith('https://www.youtube.com/watch?v='):
+        video_id = url.split('=')[1] 
+
+    if url.startswith('https://youtu.be'):
+        video_id = url.split('be/')[1] 
+
+    
+   
+    
+
+
+
+
+#Diese Funktion wandelt alle timestamps (25:38) zu einer einzelnen Minute um (25)
+#Also aus 56:33 wird dann 56
+def get_minutes(timestamps):
+    minutes_list = []
+    for minute in timestamps:
+        #if minute is 4 characters long
+        if len(minute) == 4 or len(minute) == 5:
+            minutes_list.append(minute.split(':')[0])
+
+        elif len(minute) == 7:
+            #input: 1:11:01
+            #output: 111
+            
+            minutes_list.append(minute.split(':')[0] + minute.split(':')[1])
+            
+    return minutes_list
+
+
+
+
+
+chat = pytchat.create(video_id, interruptable=False)
+
+
+
+def plot():
+    st.write('Fertig! Hier ist das Ergebnis:')
+    st.write('    ')
+    st.write('    ')
+    
+    st.write('Wie viele individuelle user kommentierten?')
+    st.write(len(authors))
+    st.write('    ')
+    st.write('Gesamtzahl aller Nachrichten')
+    st.write(len(messages))
+    st.write('    ')
+    st.write('    ')
+    st.write('    ')
+
+    st.write('Anwesende mods')
+    st.write((mods))
+    st.write('    ')
+    st.write('    ')
+    st.write('    ')
+
+    st.write('Verlauf der Anzahl der Nachrichten pro Minute:')
+    occurences = get_minutes(timestamps)
+    #plot the occurences with streamlit
+    #st.write(occurences)
+    st.plotly_chart(create_plotly_figure(occurences))
+    #st.write(occurences)
+
+
+
+    st.write('    ')
+    st.write('    ')
+    st.write('    ')
+
+    st.write('In welcher Minute lachte der YouTube chat am meisten? (haha, lol, lel, emojis, xD, ...)')
+    laugh_occurences = get_minutes(laugh)
+    #plot the laugh_occurences with streamlit
+    #st.write(laugh_occurences)
+    st.plotly_chart(create_plotly_figure(laugh_occurences))
+
+    
+
+
+
+
+
+def create_plotly_figure(occurences):
+    #create a figure
+    fig = go.Figure()
+
+    #add a histogram
+    fig.add_trace(go.Histogram(x=occurences))
+
+    #add some layout features
+    fig.update_layout(
+        #title_text='Minutes of the day',
+        xaxis_title_text='In welcher Minute',
+        yaxis_title_text='Anzahl der Nachrichten'
+    )
+
+    return fig    
+    
+    
+    
+
+
+
+
+
+#Die Hauptfunktion zum sammeln der Daten
+def runChat():
+
+  global chat
+  
+  st.write('Daten werden gesammelt... ')
+  
+  #st.image('https://media.giphy.com/media/l46Cy1rHbQ92uuLXa/giphy.gif')
+
+
+  while chat.is_alive():
         
+
+        
+        #display a gif
+        #data_load_state = st.text('Please wait...')
+        
+        
+
+        
+        for c in chat.get().sync_items():
+
+            
+            #Alle Timestamps
+            #TIMESTAMPS 0:00
+            #time_elapsed = format_time(time.time() - start_time)
+            timestamps.append(c.elapsedTime)
+            
+            
+
+
+            #UNIQUE AUTHORS
+            if c.author.name not in authors:
+                authors.append(c.author.name)
+            
+            if c.author.isChatModerator == True and c.author.isChatModerator not in mods:
+                mods.append(c.author.name)
+                
+
+
+            #FILTER MESSAGES
+            if c.message.startswith('!'):
+                pass
+            
+            elif c.author.name == 'Streamlabs':
+                pass
+            
+            #APPEND AND OUTPUT FILTERED MESSAGES 
+            else:
+##########################################################################################################################################                
+                
+                messages.append(c.message)
+                #st.write(f" {c.author.name} // {c.message} // {c.elapsedTime} // {c.amountString}")
+                
+
+                
+##########################################################################################################################################
+
+            #EXTRACT LAUGHS
+            if "haha" in c.message or ":rolling_on_the_floor_laughing:" in c.message or "lel" in c.message or "LeL" in c.message or "LEL" in c.message or "Haha" in c.message or ":grinning_squinting_face:" in c.message or ":face_with_tears_of_joy:" in c.message or "lol" in c.message or "LOL" in c.message or "HAHA" in c.message or "XD" in c.message or "xD" in c.message or "lol" in c.message:
+                laugh.append(c.elapsedTime)
+
+
+  st.write('Fertig')
+  
+  
+
+
+
+
+with col3:
+    st.write(' ')
+    if st.button('Start', key="1"):
+        runChat()
+        plot()
+
+
+
+
+
+
 
 
 
@@ -234,9 +289,7 @@ text-align: center;
 }
 </style>
 <div class="footer">
-<p>Developed with ❤️  by <a style='display: block; text-align: center;' href="https://www.instagram.com/max_mnemo/" target="_blank">Max Mnemo </a></p>
+<p>Entwickelt mit ❤️ von <a style='display: block; text-align: center;' href="https://www.instagram.com/max_mnemo/" target="_blank">Max Mnemo </a></p>
 </div>
 """
 st.markdown(footer,unsafe_allow_html=True)
-
-
