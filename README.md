@@ -43,7 +43,10 @@ __________________________________________________
 __________________________________________________
 
 <br>
-DM on instagram if you want a certain YouTube channel to be searchable
+Note to myself: This is the code for fetching all the IDs of a YouTube channel
+
+--> https://colab.research.google.com/drive/1rlverbo9tYslhXyvKMQh591u6MylJWLu?usp=sharing
+
 <br>
 
 __________________________________________________
