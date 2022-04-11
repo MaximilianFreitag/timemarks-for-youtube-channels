@@ -20,7 +20,8 @@ __________________________________________________
 
 ### Current bugs: 🐞
 
-None
+E.g. If you type in "red" in the search bar words like discoveRED will be displayed. Also non-english words
+will be displayed e.g. the german word "REDen" if you type in red as the search again.
 
 
 <br>
