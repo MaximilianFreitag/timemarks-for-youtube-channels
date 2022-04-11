@@ -77,38 +77,42 @@ with col3:
 
 
 #Loop videos:
+def main():
+        
+        global all_transcripts
+        
+        for VideoID in list_of_video_ids: 
+          params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
+          url = "https://www.youtube.com/oembed"
+          query_string = urllib.parse.urlencode(params)
+          url = url + "?" + query_string
+        
+          with urllib.request.urlopen(url) as response:
+              response_text = response.read()
+              data = json.loads(response_text.decode())
+              #print('Title: ' + data['title'])
+        
+          # Separator? - not sure its purpose...
+          print(' ')
+        
+          # retrieve the available transcripts
+          transcript_list = YouTubeTranscriptApi.list_transcripts(VideoID)
+        
+          # iterate over all available transcripts
+          for transcript in transcript_list: 
+            # fetch the actual transcript data
+            #print(transcript.fetch())
+            data = transcript.fetch()
 
-for VideoID in list_of_video_ids: 
-  params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
-  url = "https://www.youtube.com/oembed"
-  query_string = urllib.parse.urlencode(params)
-  url = url + "?" + query_string
-  
-  with urllib.request.urlopen(url) as response:
-      response_text = response.read()
-      data = json.loads(response_text.decode())
-      #print('Title: ' + data['title'])
-  
-  # Separator? - not sure its purpose...
-  print(' ')
-  
-  # retrieve the available transcripts
-  transcript_list = YouTubeTranscriptApi.list_transcripts(VideoID)
-  
-  # iterate over all available transcripts
-  for transcript in transcript_list: 
-    # fetch the actual transcript data
-    #print(transcript.fetch())
-    data = transcript.fetch()
+            #data = transcript.fetch() # [{'text': "i'm gonna attempt to collect 30 million", 'start': 0.0, 'duration': 4.16}, {'text': '...
+            #print(type(data)) # <class 'list'>
 
-    #data = transcript.fetch() # [{'text': "i'm gonna attempt to collect 30 million", 'start': 0.0, 'duration': 4.16}, {'text': '...
-    #print(type(data)) # <class 'list'>
+            # Add "video_id" for recover it later: 
+            data.insert(0, {'video_id': VideoID})
 
-    # Add "video_id" for recover it later: 
-    data.insert(0, {'video_id': VideoID})
+            # Add the fetched data to the "all_transcripts" global variable.
+            all_transcripts += data
 
-    # Add the fetched data to the "all_transcripts" global variable.
-    all_transcripts += data
 
 
 with col3:
@@ -187,6 +191,7 @@ with col3:
 
         if st.button("Search"):
                 
+                main()
                 search_dictionary(user_input, dictionary)  
         
         
@@ -204,11 +209,27 @@ with col3:
 
 
 
-
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+#whitespace
 with col1:
         st.write("")
-        
-
+           
 
 
 footer="""<style>
