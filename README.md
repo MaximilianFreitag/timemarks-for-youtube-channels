@@ -21,7 +21,7 @@ __________________________________________________
 ### Bugs and problems: 🐞
 
 - [ ] If you type in E.g. "red" into the search bar words like discoveRED will be displayed. Also non-english words will show up e.g. the german word "REDen" if you type in red as the search again.
-- [ ] I have to extract and add the video IDs from each video manually. Some do not have a transcript available. There is no automation for these processes yet.   
+ 
 
 
 <br>
@@ -40,7 +40,7 @@ https://colab.research.google.com/drive/1i5dHBNwIw8iV2kTg_LnKOrT_fIT3DtMI?usp=sh
 - [ ] Implement a cache where results are stored, so that the user don't need to fetch every video again if he/she wants to search a different word
 - [ ] Being able to search the entire YouTube channel. For demonstration purposes I only indexed 30 videos because my iterative algorithm is too slow for now
 - [ ] Add 50 YouTube channels
-
+- [ ] I have to extract and add the video IDs from each video manually. Some do not have a transcript available. So some sort of automation task would be great
 
 <br>
 <br>
