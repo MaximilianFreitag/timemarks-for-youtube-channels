@@ -18,9 +18,10 @@ __________________________________________________
 
 <br>
 
-### Current bugs: 🐞
+### Bugs and problems: 🐞
 
 - [ ] If you type in E.g. "red" into the search bar words like discoveRED will be displayed. Also non-english words will show up e.g. the german word "REDen" if you type in red as the search again.
+- [ ] I have to extract and add the video IDs from each video manually. Some do not have a transcript available. There is no automation for these processes yet.   
 
 
 <br>
