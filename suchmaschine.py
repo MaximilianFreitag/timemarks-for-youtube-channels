@@ -9,6 +9,8 @@ import urllib
 import os 
 
 
+
+
 #Favicon and Header
 st.set_page_config(
         page_title='Search YouTube content                 ',
@@ -25,8 +27,16 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 
+
+
+
+
+
+
 col1, col2, col3, col4, col5 = st.columns([1,1,5,1,1])
 img = Image.open("google.jpg")
+
+
 
 
 with col3:
@@ -81,45 +91,52 @@ def main():
         
         global all_transcripts
         
-        for VideoID in list_of_video_ids: 
-          params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
-          url = "https://www.youtube.com/oembed"
-          query_string = urllib.parse.urlencode(params)
-          url = url + "?" + query_string
-        
-          with urllib.request.urlopen(url) as response:
-              response_text = response.read()
-              data = json.loads(response_text.decode())
-              #print('Title: ' + data['title'])
-        
-          # Separator? - not sure its purpose...
-          print(' ')
-        
-          # retrieve the available transcripts
-          transcript_list = YouTubeTranscriptApi.list_transcripts(VideoID)
-        
-          # iterate over all available transcripts
-          for transcript in transcript_list: 
-            # fetch the actual transcript data
-            #print(transcript.fetch())
-            data = transcript.fetch()
+        for VideoID in list_of_video_ids:
 
-            #data = transcript.fetch() # [{'text': "i'm gonna attempt to collect 30 million", 'start': 0.0, 'duration': 4.16}, {'text': '...
-            #print(type(data)) # <class 'list'>
+                try:
 
-            # Add "video_id" for recover it later: 
-            data.insert(0, {'video_id': VideoID})
+                        params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
+                        url = "https://www.youtube.com/oembed"
+                        query_string = urllib.parse.urlencode(params)
+                        url = url + "?" + query_string
 
-            # Add the fetched data to the "all_transcripts" global variable.
-            all_transcripts += data
+                        with urllib.request.urlopen(url) as response:
+                            response_text = response.read()
+                            data = json.loads(response_text.decode())
+                            #print('Title: ' + data['title'])
+
+                        # Separator
+                        print(' ')
+
+                        # retrieve the available transcripts
+                        transcript_list = YouTubeTranscriptApi.list_transcripts(VideoID)
+
+                        # iterate over all available transcripts
+                        for transcript in transcript_list: 
+                          # fetch the actual transcript data
+                          #print(transcript.fetch())
+                          data = transcript.fetch()
+
+                          #data = transcript.fetch() # [{'text': "i'm gonna attempt to collect 30 million", 'start': 0.0, 'duration': 4.16}, {'text': '...
+                          #print(type(data)) # <class 'list'>
+
+                          # Add "video_id" for recover it later: 
+                          data.insert(0, {'video_id': VideoID})
+
+                          # Add the fetched data to the "all_transcripts" global variable.
+                          all_transcripts += data
+
+                except:
+                        st.write('Error: For the following video there is no transcript available' + '...' + 'https://www.youtube.com/watch?v=' + VideoID)
+                        pass
+
+
+
 
 
 
 with col3:
         
-
-
-
         #add a search bar
         user_input = st.text_input("Type in the words/sentences you want to search", "")
         user_input = user_input.lower()
@@ -149,6 +166,8 @@ with col3:
 
                 # You're really looping a list of dictionaries: 
                 for i in range(len(dictionary)): # <= this is really a "list".
+                        
+
                         try:
                 #print(type(dictionary[i])) # <= this is really a "dictionary".
                 #print(dictionary[i])
@@ -193,7 +212,8 @@ with col3:
                 
                 main()
                 search_dictionary(user_input, dictionary)  
-        
+
+                
         
 
 
