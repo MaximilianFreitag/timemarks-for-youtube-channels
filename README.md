@@ -47,9 +47,13 @@ https://colab.research.google.com/drive/1i5dHBNwIw8iV2kTg_LnKOrT_fIT3DtMI?usp=sh
 __________________________________________________
 
 <br>
-Note to myself: This is the code for fetching all the IDs of a YouTube channel
+Notes to myself: 
+
+- This is the code for fetching all the IDs of a YouTube channel
 
 --> https://colab.research.google.com/drive/1rlverbo9tYslhXyvKMQh591u6MylJWLu?usp=sharing
+
+- My code works for YouTube videos that are set to "only visible by link". So one can simply mirror an entire channel, set every video to "only accessible by link" and then even deleted videos from the original channel will still be searchable
 
 <br>
 
