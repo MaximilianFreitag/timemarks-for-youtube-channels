@@ -32,6 +32,9 @@ __________________________________________________
 ### To-Do list: (Things that I want to add as a functionality)
 
 - [ ] Implement multi threading for faster results (Iterating over 500 videos takes way too long)
+
+--> Note: Here is my google colab file to experiment with multi threading https://colab.research.google.com/drive/1i5dHBNwIw8iV2kTg_LnKOrT_fIT3DtMI?usp=sharing
+
 - [ ] Implement a cache where results are stored, so that the user don't need to fetch every video again if he/she wants to search a different word
 - [ ] Being able to search the entire YouTube channel. For demonstration purposes I only indexed 30 videos because my iterative algorithm is too slow for now
 - [ ] Add 50 YouTube channels
