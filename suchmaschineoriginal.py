@@ -7,7 +7,7 @@ import urllib.request
 import json
 import urllib
 import os 
-
+import time
 #Favicon and Header
 st.set_page_config(
         page_title='Search YouTube content                 ',
@@ -79,9 +79,9 @@ with col3:
 def main():
         
         global all_transcripts
-        
+        start = time.time()
         for VideoID in list_of_video_ids:
-
+                
                 try:
 
                         params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
@@ -118,7 +118,8 @@ def main():
                 except:
                         st.write('Error: For the following video there is no transcript available' + '...' + 'https://www.youtube.com/watch?v=' + VideoID)
                         pass
-
+        end = time.time()
+        st.write((f'Time for processing took {end - start} seconds'))                
 
 
 
