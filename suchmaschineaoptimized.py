@@ -7,9 +7,10 @@ import urllib.request
 import json
 import urllib
 import os 
-import requests
-from requests.sessions import Session
 import time
+import urllib3
+
+http = urllib3.PoolManager()
 #Favicon and Header
 st.set_page_config(
         page_title='Search YouTube content                 ',
@@ -80,14 +81,12 @@ def main():
         for VideoID in list_of_video_ids:
                 try:
                         params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
+                        urls = []
                         url = "https://www.youtube.com/oembed"
                         query_string = urllib.parse.urlencode(params)
                         url = url + "?" + query_string
-                        # synchronous solution!
-                        with requests.Session() as session:
-                                with session.get(url) as response:
-                                   result = response.content
-                                   data = json.loads(result.decode())
+                        response = http.request('GET', url)
+                        data = json.loads(response.data.decode('utf-8'))
 
                         # Separator
                         print(' ')
