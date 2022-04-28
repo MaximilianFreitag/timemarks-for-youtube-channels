@@ -1,3 +1,4 @@
+streamlit
 appnope==0.1.2
 apprise==0.9.5.1
 asgiref==3.4.1

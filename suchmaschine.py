@@ -8,15 +8,11 @@ import json
 import urllib
 import os 
 
-
-
-
 #Favicon and Header
 st.set_page_config(
         page_title='Search YouTube content                 ',
         page_icon="🔎"
         )
-
 
 hide_streamlit_style = """
             <style>
@@ -26,18 +22,8 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
-
-
-
-
-
-
-
 col1, col2, col3, col4, col5 = st.columns([1,1,5,1,1])
 img = Image.open("google.jpg")
-
-
-
 
 with col3:
         list_of_video_ids = []
