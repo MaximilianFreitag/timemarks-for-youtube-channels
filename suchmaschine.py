@@ -45,6 +45,9 @@ with col3:
 
         all_transcripts = []
         
+        #YouTube Video IDs 
+        #Example: (https://www.youtube.com/watch?v=...VIDEO_ID_HERE) 
+        
         cubby_Emu = ['EWfZ907Cpy8', 'sx93aUj4A_o', 'GE_00MgKMEI', 'gF69voHU_ys', 'tAtaIZD0Ebs', '3E75UvmY9GA', 'fOPP9Qe10Rg']
         veritasium = ['IgF3OX8nT0w', 'ao2Jfm35XeE', '9cNmUNHSBac', 'bHIhgxav9LY', 'cUzklzVXJwo', 'q-_7y0WUnW4', 'H1_OpWiyijU']
         kurzgesagt = ['xAUJYP8tnRE', 'XFqn3uy238E', 'F1Hq8eVOMHs', 'LmpuerlbJu0', 'Nv4Nk4AAgk8', 'xaQJbozY_Is', '0FRVx_c9T0c']
@@ -149,7 +152,7 @@ with col3:
         # We use here the global list "all_transcripts": 
         dictionary = all_transcripts
 
-        # Function to loop all transcripts and search the captions thath contains the 
+        # Function to loop all transcripts and search the captions that contains the 
         # user input.
         # TO-DO: Validate when no data is found.
         def search_dictionary(user_input, dictionary): 
