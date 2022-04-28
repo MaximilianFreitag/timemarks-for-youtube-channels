@@ -7,16 +7,12 @@ import urllib.request
 import json
 import urllib
 import os 
-
-
-
-
+import time
 #Favicon and Header
 st.set_page_config(
         page_title='Search YouTube content                 ',
         page_icon="🔎"
         )
-
 
 hide_streamlit_style = """
             <style>
@@ -26,18 +22,8 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
-
-
-
-
-
-
-
 col1, col2, col3, col4, col5 = st.columns([1,1,5,1,1])
 img = Image.open("google.jpg")
-
-
-
 
 with col3:
         list_of_video_ids = []
@@ -93,9 +79,9 @@ with col3:
 def main():
         
         global all_transcripts
-        
+        start = time.time()
         for VideoID in list_of_video_ids:
-
+                
                 try:
 
                         params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
@@ -132,7 +118,8 @@ def main():
                 except:
                         st.write('Error: For the following video there is no transcript available' + '...' + 'https://www.youtube.com/watch?v=' + VideoID)
                         pass
-
+        end = time.time()
+        st.write((f'Time for processing took {end - start} seconds'))                
 
 
 
