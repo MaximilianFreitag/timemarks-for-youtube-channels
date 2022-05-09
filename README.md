@@ -12,8 +12,24 @@ Demo --> https://share.streamlit.io/maximilianfreitag/timemarks-for-youtube-chan
 
 
 <br>
+__________________________________________________
+<br>
+
+<!-- Running locally -->
+## Running locally
 
 
+1. Git clone this project and pip install streamlit with
+   ```sh
+   pip install streamlit
+   ```
+
+2. Cd into the folder and run:
+   ```sh
+   streamlit run app.py
+
+
+<br>
 __________________________________________________
 
 <br>
