@@ -13,7 +13,7 @@ Demo --> https://share.streamlit.io/maximilianfreitag/timemarks-for-youtube-chan
 
 <br>
 __________________________________________________
-<br>
+<br />
 
 <!-- Running locally -->
 ## Running locally
@@ -26,12 +26,12 @@ __________________________________________________
 
 2. Cd into the folder and run:
    ```sh
-   streamlit run app.py
+   streamlit run suchmaschine.py
 
 
 <br>
 __________________________________________________
-
+<br />
 <br>
 
 ### Bugs and problems: 🐞
