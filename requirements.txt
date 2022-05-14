@@ -82,7 +82,7 @@ param==1.12.0
 parso==0.8.2
 pexpect==4.8.0
 pickleshare==0.7.5
-Pillow==8.4.0
+Pillow==9.0.1
 plotly==5.4.0
 ply==3.11
 proglog==0.1.9
