@@ -6,8 +6,8 @@ Demo --> https://share.streamlit.io/maximilianfreitag/timemarks-for-youtube-chan
 
 <br>
 
-![Bildschirmfoto 2022-02-14 um 17 30 31](https://user-images.githubusercontent.com/46624616/153905222-e51d9d3d-17d2-49b4-b06f-58172cb718b9.png)
 
+https://user-images.githubusercontent.com/46624616/170339271-361acaf6-64c1-4834-93d5-35cbd367af92.mov
 
 
 
